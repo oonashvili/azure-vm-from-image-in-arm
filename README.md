@@ -1,16 +1,14 @@
-# Creating Linux VM in Azure from generalized image in ARM
----
+# Creating Linux VM in Azure from generalized image in ARM 
 
-Requirement : Template of a Linux virtual machine
+Requirement : Template of a Linux virtual machine ([Documentation](https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-capture-image-resource-manager/))
 
-Documentation at : https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-capture-image-resource-manager/
 > **Note:** 
 > You Should use [AZURE CLI](https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install/)
  for it.
 
 ### Script Usage
 
-Script is very simple for usage, you should update only few variables to suiting your needs. *e.g.*
+Script is very simple for usage, you should update only few variables suiting your needs. *e.g.*
 
 - **ResourceGroupName** - `$ResGRName = "TestVM1RG"`
 - **Location** - `$location = "North Europe"`
