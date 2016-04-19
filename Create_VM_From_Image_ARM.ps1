@@ -1,4 +1,3 @@
-﻿
 ## Global Config
 select-AzureSubscription "MySubscription-PAYG"
 
@@ -32,11 +31,19 @@ New-AzureResourceGroup -Name $ResGRName -Location $location
 ## Create Storage Account
 $StorAcc = New-AzureStorageAccount -ResourceGroupName $ResGRName -Name $StorName -Type $StorType -Location $location
 
-## Create Virtual Network
-$pip = New-AzurePublicIpAddress -Name $NicName -ResourceGroupName $ResGRName -Location $location -AllocationMethod Dynamic
+## Network
+# Create New Virtual Network
+$pip = New-AzurePublicIpAddress -Name $NicName -ResourceGroupName $ResGRName -Location $location -AllocationMethod Dynamic # Static
 $SubConfig = New-AzureVirtualNetworkSubnetConfig -Name $SubName -AddressPrefix $VNetSubAddressPrefix
 $vnet = New-AzureVirtualNetwork -Name $VNetName -ResourceGroupName $ResGRName -Location $location -AddressPrefix $VNetAddressPrefix -Subnet $SubConfig
 $nic = New-AzureNetworkInterface -Name $NicName -ResourceGroupName $ResGRName -Location $location -SubnetId $vnet.Subnets[0].Id -PublicIpAddressId $pip.Id
+
+# Join To existing VNET (Comment **Create New Virtual Network** config and uncomment 5 lines below)
+#$xvnetRG = "ExistingResourceGroup"
+#$xvnetName = "ExistingVNetName"
+#$pip = New-AzurePublicIpAddress -Name $nicname -ResourceGroupName $rgName -Location $location -AllocationMethod Dynamic # Static
+#$vnet = Get-AzureVirtualNetwork -ResourceGroupName $xvnetRG -Name $xvnetName
+#$nic = New-AzureNetworkInterface -Name $nicname -ResourceGroupName $rgName -Location $location -SubnetId $vnet.Subnets[0].Id -PublicIpAddressId $pip.Id
 
 ## Setup VM
 $VMCred = Get-Credential 
